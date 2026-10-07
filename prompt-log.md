@@ -124,3 +124,11 @@
 - ผลครั้งแรก `cd backend && pytest -v`: 2 failed เพราะ test เดิมยืนยันว่าต้องมี queue_no และต้องเป็น A001
 - ตามคำสั่งเฉพาะกรณี เปลี่ยน assertion เลขคิวใน test_TC_BKG_01_1 และ test_TC_BKG_01_2 เป็นคอมเมนต์ "รอ Q-02" เท่านั้น ไม่เปลี่ยน assertion ส่วนอื่น
 - ผลหลังปรับ: `cd backend && pytest -v` — 6 passed, 0 failed; 1 warning จาก Starlette/httpx
+
+---
+
+## 2569-10-07 08.50 แก้ข้อค้นพบ F-02
+
+- คำสั่ง: ปิดข้อค้นพบทีละข้อจาก /verify
+- แก้เฉพาะ `backend/app/booking/router.py`: เอา `national_id` ออกจาก request model และ application log; คง HN ใน flow การจอง
+- ผล `cd backend && pytest -v`: 6 passed, 0 failed; 1 warning จาก Starlette/httpx
