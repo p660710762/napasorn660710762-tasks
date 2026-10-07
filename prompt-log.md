@@ -65,3 +65,36 @@
 - TC ID ที่ใช้งาน: TC-BKG-01-1, TC-BKG-01-2, TC-BKG-01-3
 - ผลลัพธ์: อัปเดตสถานะเป็น "ใช้ได้" ใน specs/001-booking/test-cases.md และเพิ่ม test 3 ตัวลง backend/tests/test_AC_BKG_01.py
 - รันผล: `cd backend && pytest -q tests/test_AC_BKG_01.py`
+
+---
+
+## 2569-10-07 08.28 คำสั่ง: /testcases AC-BKG-01 specs/001-booking/
+
+- เครื่องมือ: Copilot ใน Codespaces (Agent, Auto)
+- โหมด: เขียน test จากแถวสถานะ "ใช้ได้"
+- TC ID: TC-BKG-01-1, TC-BKG-01-2, TC-BKG-01-3 (มี test หลังบ้านอยู่ครบแล้ว)
+- ปรับ test_TC_BKG_01_2_last_seat ให้ตรวจว่ามีหมายเลขคิวและตรงกับค่าที่บันทึก แทนการกำหนดรูปแบบ A001 ซึ่งยังรอ Q-02
+- ผลทดสอบหลังบ้าน: `cd backend && pytest -v` — 6 passed, 1 warning
+- ผลทดสอบหน้าจอ: `cd frontend && npm test` — 1 passed (มีเฉพาะ setup test; ยังไม่มี AC-BKG-01 UI test เพราะ T-06 รอ Q-02 และยังไม่มี BookingResult)
+
+---
+
+## 2569-10-07 08.32 คำสั่ง: /verify specs/001-booking/
+
+- เครื่องมือ: Copilot ใน Codespaces (Agent, Auto)
+- ตรวจโค้ดทุกไฟล์ที่มีใน `backend/app/`, `frontend/src/`, `backend/tests/` และ `frontend/src/__tests__/` เทียบกับ spec, plan, tasks และ test cases
+- ผลทดสอบ: `cd backend && pytest -v` — 6 passed, 0 failed, 1 warning; ไม่รัน Vitest เพราะมีเพียง setup test ไม่มี test หน้าจอนอกจาก setup
+- ผลตามรอยไปข้างหน้า: 15 ID — ครบ 1, ยังไม่ถึง 6, รอ 0, ช่องโหว่ 8
+- ข้อค้นพบใหม่: F-01 ถึง F-11 ใน `specs/001-booking/rtm.md`
+- สร้าง RTM; ไม่แก้ spec, plan, tasks, test หรือโค้ดระบบ
+
+---
+
+## 2569-10-07 08.38 คำสั่ง: ทบทวนข้อค้นพบ /verify และแยก จริง / ยังไม่ถึง / AI เข้าใจผิด
+
+- ตรวจ `specs/001-booking/rtm.md` ทีละแถวในหัวข้อ 3 และเทียบกับ spec/task
+- จัดกอง: จริง F-01, F-03, F-04, F-05, F-06, F-07, F-09; ยังไม่ถึง F-10, F-11; AI เข้าใจผิดหรือสรุปเกินหลักฐาน F-02, F-08
+- แก้ F-01 เป็นชนิด "อ้าง ID ผิดเรื่อง": DELETE ยกเลิกคิวอ้าง FR-BKG-04 ซึ่งพูดถึงการยืนยันจอง และขัดกับ Out of scope
+- ยืนยันช่องโหว่ spec ที่ระบุ: FR-BKG-01 มี AC-BKG-05 ตรวจเฉพาะความเร็ว (F-06); FR-BKG-06 ไม่มี AC (F-07)
+- รัน `git restore -- backend/tests/test_AC_BKG_01.py` ตามคำสั่งตรวจสถานะ; หลังคำสั่ง `git status --short` ไม่พบไฟล์ใน `backend/app/`, `backend/tests/` หรือ `frontend/src/` ที่เปลี่ยน จึงไม่มี diff ของระบบ/test ที่เหลือให้คืน
+- ไม่ได้รัน test ซ้ำ เพราะรอบนี้เป็นการทบทวนและจัดประเภท RTM เท่านั้น
