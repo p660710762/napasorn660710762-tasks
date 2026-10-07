@@ -106,3 +106,11 @@
 - คำสั่ง: ปิดข้อค้นพบทีละข้อจาก /verify
 - แก้เฉพาะ `backend/app/booking/router.py` และ `backend/app/booking/service.py`: นำ endpoint/service สำหรับยกเลิกการจองที่อยู่ใน Out of scope ออก
 - ผล `cd backend && pytest -v`: 6 passed, 0 failed; 1 warning จาก Starlette/httpx
+
+---
+
+## 2569-10-07 08.46 แก้ข้อค้นพบ F-05
+
+- คำสั่ง: ปิดข้อค้นพบทีละข้อจาก /verify
+- แก้เฉพาะ `backend/app/slots/service.py`: เปลี่ยนช่วงค้นหาจาก 14 วันเป็น 30 วันตาม FR-BKG-01
+- ผล `cd backend && pytest -v`: 6 passed, 0 failed; 1 warning จาก Starlette/httpx
