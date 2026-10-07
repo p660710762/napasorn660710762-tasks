@@ -132,3 +132,23 @@
 - คำสั่ง: ปิดข้อค้นพบทีละข้อจาก /verify
 - แก้เฉพาะ `backend/app/booking/router.py`: เอา `national_id` ออกจาก request model และ application log; คง HN ใน flow การจอง
 - ผล `cd backend && pytest -v`: 6 passed, 0 failed; 1 warning จาก Starlette/httpx
+
+---
+
+## 2569-10-07 08.52 เพิ่มคำถามเปิด Q-03 และ Q-04
+
+- คำสั่ง: เพิ่มคำถามที่ยังรอทีม/ผู้เกี่ยวข้องตัดสิน ห้ามสร้าง AC ใหม่
+- อัปเดต `specs/001-booking/spec.md` เป็น Draft v3 เพิ่ม Q-03 เรื่องการบันทึกเลขบัตรใน log และ Q-04 เรื่องเกณฑ์ยอมรับ FR-BKG-01/FR-BKG-06
+- เพิ่มบันทึกใน `specs/CHANGELOG.md`; ไม่เพิ่มหรือแก้ AC
+
+---
+
+## 2569-10-07 08.54 คำสั่ง: /verify specs/001-booking/ (ทบทวนหลังแก้ข้อค้นพบ)
+
+- ผลทดสอบ: `cd backend && pytest -v` — 6 passed, 0 failed; 1 warning จาก Starlette/httpx
+- ทดสอบ frontend: ไม่รัน เพราะไม่มี test หน้าจอนอกเหนือจาก setup test
+- ตามรอย 15 ID: ครบ 1, ยังไม่ถึง 10, รอ Q แยกต่างหาก 0, ช่องโหว่ 4
+- ย้าย F-01, F-02, F-04, F-05 ไป "แก้แล้ว"; จัด F-08 เป็นข้อสรุปเดิมที่ถอนเพราะ source ไม่พอยืนยัน deployment TLS
+- ยังคง F-03, F-06, F-07, F-09 เป็นข้อค้นพบ; F-10/F-11 ยังไม่ถึงหรือรอ Q-02
+- อัปเดต RTM ให้ตรง Draft v3, เพิ่ม Q-03/Q-04 และไม่เพิ่ม AC; อัปเดตดัชนี specs
+- Commits ของการแก้แยก: F-01 `f618795`, F-05 `974a09a`, F-04 `231c791`, F-02 `5f86e93`
