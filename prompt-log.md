@@ -114,3 +114,13 @@
 - คำสั่ง: ปิดข้อค้นพบทีละข้อจาก /verify
 - แก้เฉพาะ `backend/app/slots/service.py`: เปลี่ยนช่วงค้นหาจาก 14 วันเป็น 30 วันตาม FR-BKG-01
 - ผล `cd backend && pytest -v`: 6 passed, 0 failed; 1 warning จาก Starlette/httpx
+
+---
+
+## 2569-10-07 08.48 แก้ข้อค้นพบ F-04
+
+- คำสั่ง: ปิดข้อค้นพบทีละข้อจาก /verify
+- แก้เฉพาะ `backend/app/booking/service.py`: งดสร้างรูปแบบหมายเลขคิวที่ยังรอ Q-02 และเก็บ `queue_no` เป็นค่าว่าง
+- ผลครั้งแรก `cd backend && pytest -v`: 2 failed เพราะ test เดิมยืนยันว่าต้องมี queue_no และต้องเป็น A001
+- ตามคำสั่งเฉพาะกรณี เปลี่ยน assertion เลขคิวใน test_TC_BKG_01_1 และ test_TC_BKG_01_2 เป็นคอมเมนต์ "รอ Q-02" เท่านั้น ไม่เปลี่ยน assertion ส่วนอื่น
+- ผลหลังปรับ: `cd backend && pytest -v` — 6 passed, 0 failed; 1 warning จาก Starlette/httpx
