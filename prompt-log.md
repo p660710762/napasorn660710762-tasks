@@ -98,3 +98,11 @@
 - ยืนยันช่องโหว่ spec ที่ระบุ: FR-BKG-01 มี AC-BKG-05 ตรวจเฉพาะความเร็ว (F-06); FR-BKG-06 ไม่มี AC (F-07)
 - รัน `git restore -- backend/tests/test_AC_BKG_01.py` ตามคำสั่งตรวจสถานะ; หลังคำสั่ง `git status --short` ไม่พบไฟล์ใน `backend/app/`, `backend/tests/` หรือ `frontend/src/` ที่เปลี่ยน จึงไม่มี diff ของระบบ/test ที่เหลือให้คืน
 - ไม่ได้รัน test ซ้ำ เพราะรอบนี้เป็นการทบทวนและจัดประเภท RTM เท่านั้น
+
+---
+
+## 2569-10-07 08.44 แก้ข้อค้นพบ F-01
+
+- คำสั่ง: ปิดข้อค้นพบทีละข้อจาก /verify
+- แก้เฉพาะ `backend/app/booking/router.py` และ `backend/app/booking/service.py`: นำ endpoint/service สำหรับยกเลิกการจองที่อยู่ใน Out of scope ออก
+- ผล `cd backend && pytest -v`: 6 passed, 0 failed; 1 warning จาก Starlette/httpx
